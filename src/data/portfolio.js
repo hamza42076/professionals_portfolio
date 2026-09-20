@@ -83,7 +83,7 @@ export const projects = [
     tech: ["MongoDB", "Express", "React", "Node.js", "Socket.io", "Chart.js"],
     github: "https://github.com/your-username/screen-tracker",
     live: "https://screen-tracker-demo.vercel.app",
-    // Gradient used for the card thumbnail (replace with an <img> if you have screenshots)
+    // Gradient + emoji used for the card thumbnail when no `image` is set
     gradient: "from-teal-500/40 via-cyan-500/20 to-transparent",
     emoji: "🏭",
   },
@@ -92,8 +92,10 @@ export const projects = [
     description:
       "Upload audio or video and get accurate, timestamped transcripts powered by the OpenAI Whisper API. Transcripts are stored in MongoDB, searchable, and exportable as SRT / TXT.",
     tech: ["React", "Node.js", "Express", "MongoDB", "Whisper API", "FFmpeg"],
-    github: "https://github.com/your-username/whisper-transcriber",
-    live: "https://whisper-transcriber-demo.vercel.app",
+    github: "https://github.com/hamza42076/video-transcript-app",
+    live: "https://video-transcript-app.vercel.app/",
+    // Screenshot shown on the card (put files in /public/projects). Omit to show the gradient + emoji instead.
+    image: "/projects/transcript-app.webp",
     gradient: "from-purple-500/40 via-fuchsia-500/20 to-transparent",
     emoji: "🎙️",
   },

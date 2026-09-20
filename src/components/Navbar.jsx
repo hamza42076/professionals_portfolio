@@ -46,7 +46,9 @@ export default function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled ? "glass shadow-lg shadow-black/20" : "bg-transparent"
+        scrolled
+          ? "border-b border-border bg-bg/85 shadow-lg shadow-black/20 backdrop-blur-md"
+          : "bg-transparent"
       }`}
     >
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">

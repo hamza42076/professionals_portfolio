@@ -1,5 +1,6 @@
 "use client";
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { FiExternalLink, FiGithub } from "react-icons/fi";
 import { projects } from "@/data/portfolio";
@@ -47,13 +48,23 @@ function ProjectCard({ project, index }) {
         transition={{ duration: 0.3 }}
         className="group glass flex h-full flex-col overflow-hidden rounded-2xl transition-shadow duration-300 hover:shadow-2xl hover:shadow-accent-2/20"
       >
-        {/* Thumbnail — replace with <Image /> once you have screenshots */}
+        {/* Thumbnail — screenshot if `image` is set, otherwise gradient + emoji */}
         <div
-          className={`relative flex h-44 items-center justify-center bg-gradient-to-br ${project.gradient}`}
+          className={`relative flex h-44 items-center justify-center overflow-hidden bg-linear-to-br ${project.gradient}`}
         >
-          <span className="text-6xl transition-transform duration-500 group-hover:scale-125 group-hover:rotate-6">
-            {project.emoji}
-          </span>
+          {project.image ? (
+            <Image
+              src={project.image}
+              alt={`${project.title} screenshot`}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+            />
+          ) : (
+            <span className="text-6xl transition-transform duration-500 group-hover:scale-125 group-hover:rotate-6">
+              {project.emoji}
+            </span>
+          )}
           {/* Hover overlay with links */}
           <div className="absolute inset-0 flex items-center justify-center gap-4 bg-bg/70 opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100">
             <a
