@@ -1,26 +1,159 @@
 @import "tailwindcss";
 
+/* ============================================================
+   THEME TOKENS — change the accent colours here
+   ============================================================ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #0a0b10;
+  --bg-elevated: #10121a;
+  --surface: rgba(255, 255, 255, 0.04);
+  --border: rgba(255, 255, 255, 0.08);
+  --text: #e6e8ef;
+  --muted: #9aa0b4;
+
+  /* Accent gradient: teal → blue → purple */
+  --accent-1: #14b8a6;
+  --accent-2: #3b82f6;
+  --accent-3: #a855f7;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-accent-1: var(--accent-1);
+  --color-accent-2: var(--accent-2);
+  --color-accent-3: var(--accent-3);
+
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-heading: var(--font-poppins), var(--font-inter), sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ============================================================
+   BASE
+   ============================================================ */
+html {
+  scroll-behavior: smooth;
+  /* Offset for the sticky navbar when jumping to a section */
+  scroll-padding-top: 80px;
+}
+
+/* `clip` (not `hidden`) so the page doesn't become a scroll container.
+   Prevents horizontal scroll on mobile caused by off-screen reveal
+   animations and decorative background glows. */
+html,
+body {
+  overflow-x: clip;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+}
+
+::selection {
+  background: var(--accent-2);
+  color: #fff;
+}
+
+/* Thin custom scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--accent-1), var(--accent-3));
+  border-radius: 999px;
+}
+
+/* ============================================================
+   UTILITIES
+   ============================================================ */
+@utility gradient-text {
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-shift 6s ease infinite;
+}
+
+@utility gradient-bg {
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3));
+  background-size: 200% auto;
+  animation: gradient-shift 6s ease infinite;
+}
+
+@utility glass {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Section spacing used by every section */
+@utility section {
+  padding-block: 6rem;
+  scroll-margin-top: 80px;
+  /* Clip horizontal overflow from glows / slide-in reveals on small screens */
+  overflow-x: clip;
+}
+
+/* ============================================================
+   KEYFRAMES
+   ============================================================ */
+@keyframes gradient-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Blinking cursor for typing effect */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
+
+/* Floating blobs in the hero background */
+@keyframes float-a {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(60px, -40px) scale(1.15); }
+}
+@keyframes float-b {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(-50px, 50px) scale(1.1); }
+}
+@keyframes float-c {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(30px, 60px) scale(0.9); }
+}
+.blob-a { animation: float-a 14s ease-in-out infinite; }
+.blob-b { animation: float-b 18s ease-in-out infinite; }
+.blob-c { animation: float-c 16s ease-in-out infinite; }
+
+/* Scroll-down indicator bounce */
+@keyframes bounce-soft {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(8px); }
+}
+.bounce-soft { animation: bounce-soft 1.8s ease-in-out infinite; }
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
 }

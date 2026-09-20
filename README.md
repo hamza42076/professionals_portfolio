@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Portfolio — Full Stack (MERN) Developer
 
-## Getting Started
+A modern, dark-themed single-page portfolio built with **Next.js 16 (App Router)**, **Tailwind CSS v4** and **Framer Motion**.
 
-First, run the development server:
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build
+npm start        # serve production build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Customise your content
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+All text, projects, skills, experience and links live in **one file**:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/data/portfolio.js
+```
 
-## Learn More
+Edit `personal`, `socials`, `skillTags`, `skills`, `projects`, `experience` and `navLinks` there. You should not need to touch the components for normal edits.
 
-To learn more about Next.js, take a look at the following resources:
+### Colours / theme
+Accent colours and the dark palette are CSS variables at the top of `src/app/globals.css` (`--accent-1`, `--accent-2`, `--accent-3`, `--bg`, …).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Fonts
+Loaded via `next/font/google` in `src/app/layout.js` (Inter for body, Poppins for headings). Swap them there.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Project screenshots
+Project cards currently show a gradient + emoji thumbnail. Drop screenshots into `public/` and replace the thumbnail block in `src/components/Projects.jsx` with `next/image`.
 
-## Deploy on Vercel
+### Contact form
+`src/components/Contact.jsx` simulates a submission. Wire `handleSubmit` to a Next.js route handler, Formspree, EmailJS or Resend to actually send mail.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Project structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+├── app/
+│   ├── globals.css      # theme tokens, utilities, keyframes
+│   ├── layout.js        # fonts + metadata
+│   └── page.js          # assembles the sections
+├── components/
+│   ├── Navbar.jsx       # sticky nav, active link, mobile menu
+│   ├── Hero.jsx         # typing effect, animated background, CTAs
+│   ├── About.jsx        # bio, stats, animated skill tag cloud
+│   ├── Projects.jsx     # 3D-tilt project cards
+│   ├── Skills.jsx       # circular meters + progress bars
+│   ├── Experience.jsx   # scroll-drawn vertical timeline
+│   ├── Contact.jsx      # floating-label form + socials
+│   ├── Footer.jsx
+│   ├── Reveal.jsx       # reusable scroll-reveal wrapper
+│   └── SectionHeading.jsx
+├── data/
+│   └── portfolio.js     # ← ALL YOUR CONTENT
+└── hooks/
+    ├── useTypewriter.js
+    └── useActiveSection.js
+```
