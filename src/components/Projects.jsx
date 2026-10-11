@@ -109,23 +109,23 @@ function ProjectCard({ project, index }) {
             ))}
           </ul>
 
-          {/* Footer links */}
-          <div className="flex items-center gap-5 border-t border-border pt-4 text-sm">
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1.5 text-muted transition-colors duration-300 hover:text-white"
-            >
-              <FiGithub /> Code
-            </a>
+          {/* Footer buttons */}
+          <div className="grid grid-cols-2 gap-3 border-t border-border pt-4 text-sm font-medium">
             <a
               href={project.live}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1.5 text-muted transition-colors duration-300 hover:text-accent-1"
+              className="gradient-bg inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-white transition-all duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-accent-2/30"
             >
               <FiExternalLink /> Live Demo
+            </a>
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center justify-center gap-2 rounded-lg border border-border bg-surface px-4 py-2.5 text-text transition-all duration-300 hover:scale-[1.03] hover:border-accent-1 hover:text-accent-1"
+            >
+              <FiGithub /> GitHub Code
             </a>
           </div>
         </div>

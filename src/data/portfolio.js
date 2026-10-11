@@ -100,12 +100,13 @@ export const projects = [
     emoji: "🎙️",
   },
   {
-    title: "E-Commerce Platform",
+    title: "SmartShop E-Commerce",
     description:
-      "Full-featured store with product catalogue, cart, Stripe checkout, order tracking and an admin panel for inventory management. Built with JWT auth and server-side pagination.",
-    tech: ["Next.js", "Node.js", "MongoDB", "Stripe", "Redux Toolkit", "Tailwind"],
-    github: "https://github.com/your-username/ecommerce",
-    live: "https://ecommerce-demo.vercel.app",
+      "A full-stack online store with product catalogue, cart, cash-on-delivery checkout, real-time stock counts, email notifications and an admin panel for managing products and orders.",
+    tech: ["Next.js", "TypeScript", "MongoDB", "Zustand", "Zod", "Tailwind"],
+    github: "https://github.com/hamza42076/E-commerce-project",
+    live: "https://e-commerce-project-yhc4.vercel.app/",
+    image: "/projects/ecommerce.webp",
     gradient: "from-blue-500/40 via-indigo-500/20 to-transparent",
     emoji: "🛒",
   },
