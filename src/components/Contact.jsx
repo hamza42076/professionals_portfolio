@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiGithub, FiLinkedin, FiMail, FiMapPin, FiSend, FiTwitter } from "react-icons/fi";
+import { FiGithub, FiLinkedin, FiMail, FiMapPin, FiSend } from "react-icons/fi";
 import { personal, socials } from "@/data/portfolio";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
@@ -50,26 +50,40 @@ function Field({ id, label, type = "text", textarea = false, value, onChange }) 
 const socialLinks = [
   { icon: FiGithub, href: socials.github, label: "GitHub" },
   { icon: FiLinkedin, href: socials.linkedin, label: "LinkedIn" },
-  { icon: FiTwitter, href: socials.twitter, label: "Twitter" },
 ];
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState("idle"); // idle | sending | sent
+  const [feedback, setFeedback] = useState("");
 
   const update = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  /**
-   * Replace this with a real submission (e.g. a Next.js route handler,
-   * Formspree, EmailJS or Resend). Currently it just simulates a request.
-   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("sending");
-    await new Promise((r) => setTimeout(r, 1200));
-    setStatus("sent");
-    setForm({ name: "", email: "", message: "" });
-    setTimeout(() => setStatus("idle"), 4000);
+    setFeedback("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to send message.");
+      }
+
+      setStatus("sent");
+      setForm({ name: "", email: "", message: "" });
+      setTimeout(() => setStatus("idle"), 4000);
+    } catch (error) {
+      setStatus("idle");
+      setFeedback(error.message || "Something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -97,7 +111,9 @@ export default function Contact() {
             <ul className="mb-8 space-y-4">
               <li>
                 <a
-                  href={`mailto:${personal.email}`}
+                  href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(personal.email)}`}
+                  target="_blank"
+                  rel="noreferrer"
                   className="group flex items-center gap-4 text-muted transition-colors duration-300 hover:text-white"
                 >
                   <span className="glass flex h-11 w-11 items-center justify-center rounded-xl transition-all duration-300 group-hover:border-accent-1 group-hover:text-accent-1">
@@ -138,6 +154,12 @@ export default function Contact() {
                 <Field id="email" label="Your Email" type="email" value={form.email} onChange={update} />
               </div>
               <Field id="message" label="Your Message" textarea value={form.message} onChange={update} />
+
+              {feedback && (
+                <p className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-200">
+                  {feedback}
+                </p>
+              )}
 
               <button
                 type="submit"

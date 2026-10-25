@@ -21,7 +21,7 @@ export const personal = {
   ],
   tagline:
     "I build fast, scalable web applications with MongoDB, Express, React and Node.js — from clean UI to robust APIs.",
-  email: "hello@example.com",
+  email: "coodingkakeera@gmail.com",
   location: "Pakistan",
   resumeUrl: "#", // link to your CV / resume PDF (put it in /public and use "/resume.pdf")
   bio: [
@@ -37,9 +37,8 @@ export const personal = {
 };
 
 export const socials = {
-  github: "https://github.com/hamza42076?tab=repositories",
+  github: "https://github.com/hamza42076",
   linkedin: "https://www.linkedin.com/in/muhammad-hamza-4831552bb/",
-  twitter: "https://twitter.com/your-username",
 };
 
 // Tag cloud in the About section — animates in one by one

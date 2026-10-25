@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { FiArrowDown, FiGithub, FiLinkedin, FiTwitter } from "react-icons/fi";
+import { FiArrowDown, FiGithub, FiLinkedin } from "react-icons/fi";
 import { personal, socials } from "@/data/portfolio";
 import useTypewriter from "@/hooks/useTypewriter";
 
@@ -22,7 +22,6 @@ const item = {
 const socialLinks = [
   { icon: FiGithub, href: socials.github, label: "GitHub" },
   { icon: FiLinkedin, href: socials.linkedin, label: "LinkedIn" },
-  { icon: FiTwitter, href: socials.twitter, label: "Twitter" },
 ];
 
 /**
