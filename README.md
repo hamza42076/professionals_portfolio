@@ -31,7 +31,9 @@ Loaded via `next/font/google` in `src/app/layout.js` (Inter for body, Poppins fo
 Project cards currently show a gradient + emoji thumbnail. Drop screenshots into `public/` and replace the thumbnail block in `src/components/Projects.jsx` with `next/image`.
 
 ### Contact form
-`src/components/Contact.jsx` simulates a submission. Wire `handleSubmit` to a Next.js route handler, Formspree, EmailJS or Resend to actually send mail.
+The contact form sends messages through the `/api/contact` route using SMTP. To enable it locally, copy `.env.example` to `.env.local` and set `SMTP_USER` to your sending email address and `SMTP_PASS` to its SMTP password. For Gmail, use a Google App Password (2-Step Verification must be enabled); your normal Google password will not work. Keep these values server-side and never prefix them with `NEXT_PUBLIC_`.
+
+The default SMTP settings are Gmail on port `587` with STARTTLS. If you use another provider, set `SMTP_HOST` and `SMTP_PORT` to its SMTP settings. Restart the development server after changing environment variables. In a deployment, add the same variables in the hosting provider's server-side environment settings.
 
 ## Project structure
 
